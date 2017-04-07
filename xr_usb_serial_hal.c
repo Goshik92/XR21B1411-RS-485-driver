@@ -529,6 +529,7 @@ int xr_usb_serial_set_line(struct usb_serial_port *port, struct usb_cdc_line_cod
 	    gpio_mode = UART_GPIO_MODE_SEL_GPIO;
 	}
     xr_usb_serial_set_reg(port,portdata->reg_map.uart_flow_addr, flow);
+	gpio_mode = 0x0b; // FIXME hardcoded to RS-485
     xr_usb_serial_set_reg(port,portdata->reg_map.uart_gpio_mode_addr, gpio_mode);
 	return 0;
 	 
