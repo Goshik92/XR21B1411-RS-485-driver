@@ -1562,21 +1562,16 @@ static struct usb_serial_driver xr_usb_serial_device = {
 static int __init xr_usb_serial_init(void)
 {
         int retval;
-        retval = usb_serial_register(&xr_usb_serial_device);
+		
+		struct usb_serial_driver *serial_drivers[2] = {&xr_usb_serial_device, NULL};
+		retval = usb_serial_register_drivers(&xr_usb_serial_driver, serial_drivers);
         if (retval)
                 goto failed_device_register;
-
-
-        retval = usb_register(&xr_usb_serial_driver);
-        if (retval)
-                goto failed_driver_register;
 
         printk(KERN_INFO DRIVER_DESC ": " DRIVER_VERSION "\n");
 
         return 0;
 
-failed_driver_register:
-        usb_serial_deregister(&xr_usb_serial_device);
 failed_device_register:
         return retval;
 }
@@ -1584,8 +1579,8 @@ failed_device_register:
 
 static void __exit xr_usb_serial_exit(void)
 {
-        usb_deregister(&xr_usb_serial_driver);
-        usb_serial_deregister(&xr_usb_serial_device);
+        struct usb_serial_driver *serial_drivers[2] = {&xr_usb_serial_device, NULL};
+		usb_serial_deregister_drivers(&xr_usb_serial_driver, serial_drivers);
 }
 
 module_init(xr_usb_serial_init);
