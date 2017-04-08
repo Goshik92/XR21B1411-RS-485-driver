@@ -6,6 +6,6 @@ This driver is based on the original driver from [Exar](https://www.exar.com/con
 
 The driver was tested with [Armbian 5.25](https://dl.armbian.com/orangepizero/archive/).
 
-To build and install the driver follow README.txt.
+To build and install the driver follow [README.txt](README.txt).
 
-Keywords: XR21B1411, Orange Pi Zero, RS-485, Armbian.
+Keywords: XR21B1411, Orange Pi Zero, RS-485, Armbian, Linux.
